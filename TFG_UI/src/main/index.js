@@ -6,19 +6,22 @@ import icon from '../../resources/icon.png?asset'
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1024,
+    height: 600,
     show: false,
+    frame: false /* Muestra la barra de título con botón close o minimize */,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
-    }
+    },
+    titleBarStyle: 'hidden'
   })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+    mainWindow.setFullScreen(true)
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
