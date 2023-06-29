@@ -31,6 +31,21 @@ body {
   border-radius: 10px;
 }
 
+section{
+  animation: fade 0.3s linear reverse;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
 ul {
   list-style: none;
 }
