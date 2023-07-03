@@ -1,4 +1,4 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
@@ -11,6 +11,12 @@ if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('electronAPI', {
+      cancelBluetoothRequest: (callback) => ipcRenderer.send('cancel-bluetooth-request', callback),
+      bluetoothPairingRequest: (callback) => ipcRenderer.on('bluetooth-pairing-request', callback),
+      bluetoothPairingResponse: (response) =>
+        ipcRenderer.send('bluetooth-pairing-response', response)
+    })
   } catch (error) {
     console.error(error)
   }
