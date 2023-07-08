@@ -14,9 +14,5 @@ module.exports = {
     ecmaVersion: 2021
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:prettier/recommended'
   ]
 }
